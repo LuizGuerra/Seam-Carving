@@ -75,6 +75,15 @@ int calculateEnergy (RGB* rgb1, RGB* rgb2) {
     return red + green + blue;
 }
 
+int calculatePixelEnergy (Img* picture, int currentLineIndex);
+int calculatePixelEnergy (Img* picture, int currentLineIndex)) {
+    int previusLineIndex = index - picture.width;
+    int nextLineIndex = index + picture.width;
+    int horizontalValue = calculateEnergy(picture.img[currentLineIndex+1], picture.img[currentLineIndex-1]);
+    int verticalValue = calculateEnergy(picture.img[nextLineIndex], picture.img[previusLineIndex])
+    return horizontalValue + verticalValue;
+}
+
 int main(int argc, char** argv)
 {
     if(argc < 2) {
