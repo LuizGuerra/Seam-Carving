@@ -66,22 +66,22 @@ void load(char* name, Img* pic)
 
 int calculateEnergy (RGB* rgb1, RGB* rgb2);
 int calculateEnergy (RGB* rgb1, RGB* rgb2) {
-    int red = rgb2.r - rgb1.r;
+    int red = rgb2->r - rgb1->r;
     red *= red;
-    int green = rgb2.g - rgb1.g;
+    int green = rgb2->g - rgb1->g;
     green *= green;
-    int blue = rgb2.b - rgb1.b;
+    int blue = rgb2->b - rgb1->b;
     blue *= blue;
     return red + green + blue;
 }
 
 int calculatePixelEnergy (Img* picture, int currentLineIndex);
-int calculatePixelEnergy (Img* picture, int currentLineIndex)) {
+int calculatePixelEnergy (Img* picture, int currentLineIndex) {
     // we probably wont use this method because it wont be the best solution in performance
-    int previusLineIndex = index - picture.width;
-    int nextLineIndex = index + picture.width;
-    int horizontalValue = calculateEnergy(picture.img[currentLineIndex+1], picture.img[currentLineIndex-1]);
-    int verticalValue = calculateEnergy(picture.img[nextLineIndex], picture.img[previusLineIndex])
+    int previousLineIndex = currentLineIndex - picture->width;
+    int nextLineIndex = currentLineIndex + picture->width;
+    int horizontalValue = calculateEnergy(&picture->img[currentLineIndex+1], &picture->img[currentLineIndex-1]);
+    int verticalValue = calculateEnergy(&picture->img[nextLineIndex], &picture->img[previousLineIndex]);
     return horizontalValue + verticalValue;
 }
 
