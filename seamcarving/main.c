@@ -77,12 +77,15 @@ int calculateEnergy (RGB* rgb1, RGB* rgb2) {
 
 int calculatePixelEnergy (Img* picture, int currentLineIndex);
 int calculatePixelEnergy (Img* picture, int currentLineIndex)) {
+    // we probably wont use this method because it wont be the best solution in performance
     int previusLineIndex = index - picture.width;
     int nextLineIndex = index + picture.width;
     int horizontalValue = calculateEnergy(picture.img[currentLineIndex+1], picture.img[currentLineIndex-1]);
     int verticalValue = calculateEnergy(picture.img[nextLineIndex], picture.img[previusLineIndex])
     return horizontalValue + verticalValue;
 }
+
+
 
 int main(int argc, char** argv)
 {
