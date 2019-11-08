@@ -77,11 +77,50 @@ int calculateEnergy (RGB* rgb1, RGB* rgb2) {
 
 int calculatePixelEnergy (Img* picture, int currentLineIndex);
 int calculatePixelEnergy (Img* picture, int currentLineIndex) {
+
     // we probably wont use this method because it wont be the best solution in performance
+
     int previousLineIndex = currentLineIndex - picture->width;
     int nextLineIndex = currentLineIndex + picture->width;
-    int horizontalValue = calculateEnergy(&picture->img[currentLineIndex+1], &picture->img[currentLineIndex-1]);
-    int verticalValue = calculateEnergy(&picture->img[nextLineIndex], &picture->img[previousLineIndex]);
+
+    RGB left, right, top, bot;
+
+    if (currentLineIndex < picture->width ) {
+//        Pixel is from top border
+        top.r = top.g = top.b = 0;
+        bot = picture->img[nextLineIndex];
+        left = picture->img[currentLineIndex-1];
+        right = picture->img[currentLineIndex+1];
+    } else if ( currentLineIndex >= picture->width * picture->height-picture->width - 1 ) {
+//        Pixel is from bottom border
+        bot.r = bot.g = bot.b = 0;
+        top = picture->img[previousLineIndex];
+        left = picture->img[currentLineIndex-1];
+        right = picture->img[currentLineIndex+1];
+    } else if ( currentLineIndex % picture->width ) {
+//        Pixel is from left border
+        left.r = left.g = left.b = 0;
+        right = picture->img[currentLineIndex+1];
+        top = picture->img[previousLineIndex];
+        bot = picture->img[nextLineIndex];
+    } else if ( currentLineIndex % (picture->width - 1) ) {
+//        Pixel is from right border
+        right.r = right.g = right.b = 0;
+        left = picture->img[currentLineIndex-1];
+        top = picture->img[previousLineIndex];
+        bot = picture->img[nextLineIndex];
+    } else {
+//        Pixel is not in border
+        top = picture->img[previousLineIndex];
+        bot = picture->img[nextLineIndex];
+        left = picture->img[currentLineIndex-1];
+        right = picture->img[currentLineIndex+1];
+    }
+
+    int horizontalValue = calculateEnergy(&right, &left);
+    int verticalValue = calculateEnergy(&bot, &top);
+
+
     return horizontalValue + verticalValue;
 }
 
@@ -179,8 +218,14 @@ void keyboard(unsigned char key, int x, int y)
         // ... (crie uma função para isso!)
 
         // Exemplo: pintando tudo de amarelo
-        for(int i=0; i<pic[2].height*pic[2].width; i++)
-            pic[2].img[i].r = pic[2].img[i].g = 255;
+//        for(int i=0; i<pic[2].height*pic[2].width; i++)
+//            pic[2].img[i].r = pic[2].img[i].g = 255;
+
+        for (int i = 0; i < pic[2].width * pic[2].height; i++) {
+            pic[2].img[i].r = 255;
+            pic[2].img[i].g = 0;
+            pic[2].img[i].b = 0;
+        }
 
         // Chame uploadTexture a cada vez que mudar
         // a imagem (pic[2])

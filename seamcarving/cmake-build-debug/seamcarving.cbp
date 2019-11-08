@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="seamcarving"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="clang"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="seamcarving">
+				<Option output="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/seamcarving" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/OpenGL.framework"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/GLUT.framework/Headers"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 seamcarving"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="seamcarving/fast">
+				<Option output="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/seamcarving" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="clang"/>
+				<Compiler>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/OpenGL.framework"/>
+					<Add directory="/Library/Developer/CommandLineTools/SDKs/MacOSX10.14.sdk/System/Library/Frameworks/GLUT.framework/Headers"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include/c++/v1"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/lib/clang/10.0.1/include"/>
+					<Add directory="/Library/Developer/CommandLineTools/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 seamcarving/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/SOIL.h">
+			<Option target="seamcarving"/>
+		</Unit>
+		<Unit filename="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/lib/SOIL/SOIL.c">
+			<Option target="seamcarving"/>
+		</Unit>
+		<Unit filename="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/lib/SOIL/SOIL.h">
+			<Option target="seamcarving"/>
+		</Unit>
+		<Unit filename="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/lib/SOIL/image_DXT.c">
+			<Option target="seamcarving"/>
+		</Unit>
+		<Unit filename="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/lib/SOIL/image_DXT.h">
+			<Option target="seamcarving"/>
+		</Unit>
+		<Unit filename="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/lib/SOIL/image_helper.c">
+			<Option target="seamcarving"/>
+		</Unit>
+		<Unit filename="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/lib/SOIL/image_helper.h">
+			<Option target="seamcarving"/>
+		</Unit>
+		<Unit filename="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/lib/SOIL/stb_image_aug.c">
+			<Option target="seamcarving"/>
+		</Unit>
+		<Unit filename="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/lib/SOIL/stb_image_aug.h">
+			<Option target="seamcarving"/>
+		</Unit>
+		<Unit filename="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/main.c">
+			<Option target="seamcarving"/>
+		</Unit>
+		<Unit filename="/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

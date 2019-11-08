@@ -1,0 +1,34 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/SOIL.h
+
+/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/main.c
+stdio.h
+-
+stdlib.h
+-
+string.h
+-
+windows.h
+-
+OpenGL/gl.h
+-
+OpenGL/glu.h
+-
+GLUT/glut.h
+-
+GL/gl.h
+-
+GL/glu.h
+-
+GL/glut.h
+-
+SOIL.h
+/Users/luizpedrofranciscattoguerra/Desktop/Seam-Carving/seamcarving/SOIL.h
+
