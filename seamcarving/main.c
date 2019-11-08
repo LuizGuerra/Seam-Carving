@@ -68,6 +68,8 @@ int calculateEnergy (RGB* rgb1, RGB* rgb2);
 int calculateEnergy (RGB* rgb1, RGB* rgb2) {
     int red = rgb2->r - rgb1->r;
     red *= red;
+    printf("RGB1: %i %i %i\n", rgb1->r, rgb1->g, rgb1->b);
+    printf("RGB2: %i %i %i\n\n", rgb2->r, rgb2->g, rgb2->b);
     int green = rgb2->g - rgb1->g;
     green *= green;
     int blue = rgb2->b - rgb1->b;
@@ -75,42 +77,70 @@ int calculateEnergy (RGB* rgb1, RGB* rgb2) {
     return red + green + blue;
 }
 
+int isRightBorder (int index, int width, int height);
+int isRightBorder (int index, int width, int height) {
+    for (int i = width-1; i < width*height; i += width) {
+        if (i == index) { return 1; }
+    }
+    return 0;
+}
+
 int calculatePixelEnergy (Img* picture, int currentLineIndex);
 int calculatePixelEnergy (Img* picture, int currentLineIndex) {
-
-    // we probably wont use this method because it wont be the best solution in performance
 
     int previousLineIndex = currentLineIndex - picture->width;
     int nextLineIndex = currentLineIndex + picture->width;
 
     RGB left, right, top, bot;
 
-    if (currentLineIndex < picture->width ) {
-//        Pixel is from top border
+    int isTop = currentLineIndex < picture->width;
+    int isBot = currentLineIndex >= (picture->width * picture->height-picture->width);
+    int isLeft = currentLineIndex % picture->width == 0;
+    int isRight = isRightBorder(currentLineIndex, picture->width, picture->height);
+
+    /* Pra fazer testes: */
+
+//    printf("  %i\n", isTop);
+//    printf("%i %i %i\n", isLeft,!(isLeft || isRight || isBot || isTop) , isRight);
+//    printf("  %i\n\n", isBot);
+
+    if (isTop) {
         top.r = top.g = top.b = 0;
         bot = picture->img[nextLineIndex];
-        left = picture->img[currentLineIndex-1];
-        right = picture->img[currentLineIndex+1];
-    } else if ( currentLineIndex >= picture->width * picture->height-picture->width - 1 ) {
-//        Pixel is from bottom border
+        if (isLeft) {
+            left.r = left.g = left.b = 0;
+            right = picture->img[currentLineIndex+1];
+        } else if (isRight) {
+            left = picture->img[currentLineIndex-1];
+            right.r = right.g = right.b = 0;
+        } else {
+            left = picture->img[currentLineIndex-1];
+            right = picture->img[currentLineIndex+1];
+        }
+    } else if (isBot) {
         bot.r = bot.g = bot.b = 0;
         top = picture->img[previousLineIndex];
-        left = picture->img[currentLineIndex-1];
-        right = picture->img[currentLineIndex+1];
-    } else if ( currentLineIndex % picture->width ) {
-//        Pixel is from left border
+        if (isLeft) {
+            left.r = left.g = left.b = 0;
+            right = picture->img[currentLineIndex+1];
+        } else if (isRight) {
+            left = picture->img[currentLineIndex-1];
+            right.r = right.g = right.b = 0;
+        } else {
+            left = picture->img[currentLineIndex-1];
+            right = picture->img[currentLineIndex+1];
+        }
+    } else if (isLeft) {
+        top = picture->img[previousLineIndex];
+        bot = picture->img[nextLineIndex];
         left.r = left.g = left.b = 0;
         right = picture->img[currentLineIndex+1];
+    } else if (isRight) {
         top = picture->img[previousLineIndex];
         bot = picture->img[nextLineIndex];
-    } else if ( currentLineIndex % (picture->width - 1) ) {
-//        Pixel is from right border
-        right.r = right.g = right.b = 0;
         left = picture->img[currentLineIndex-1];
-        top = picture->img[previousLineIndex];
-        bot = picture->img[nextLineIndex];
-    } else {
-//        Pixel is not in border
+        right.r = right.g = right.b = 0;
+    } else { /* Is not in a border */
         top = picture->img[previousLineIndex];
         bot = picture->img[nextLineIndex];
         left = picture->img[currentLineIndex-1];
@@ -119,7 +149,6 @@ int calculatePixelEnergy (Img* picture, int currentLineIndex) {
 
     int horizontalValue = calculateEnergy(&right, &left);
     int verticalValue = calculateEnergy(&bot, &top);
-
 
     return horizontalValue + verticalValue;
 }
