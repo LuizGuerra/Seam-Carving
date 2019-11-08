@@ -153,7 +153,71 @@ int calculatePixelEnergy (Img* picture, int currentLineIndex) {
     return horizontalValue + verticalValue;
 }
 
+int * energyMap (Img* img);
+int * energyMap (Img* img) {
+    int size = img->height*img->width;
+    int array [size];
+    for (int index = 0; index < size; index++) {
+        if (pic[1].img[index].r > 100) {
+            array[index] = 0;
+            continue;
+        }
+        array[index] = calculatePixelEnergy(&img[0], index);
+        if (pic[1].img[index].g > 100) {
+            array[index] += 10000000; // 10 000 000
+        }
+    }
+    return array;
+}
 
+int * acumulatedEnergyMap (Img* picture, const int* energyMapArray);
+int * acumulatedEnergyMap (Img* picture, const int* energyMapArray) {
+
+    int size = picture->height * picture->width;
+
+    int acumuledEnergyMapArray [size];
+
+    for (int index = 0; index < size; index++) {
+        int leftFather, rightFather;
+        int isTop = index < picture->width;
+        int isBot = index >= (picture->width * picture->height-picture->width);
+        int isLeft = index % picture->width == 0;
+        int isRight = isRightBorder(index, picture->width, picture->height);
+
+        if (isTop) {
+            acumuledEnergyMapArray[index] = energyMapArray[index];
+        } else {
+            acumuledEnergyMapArray[index] =  energyMapArray[index] + energyMapArray [index - picture->width];
+            if (isLeft) {
+                rightFather =  energyMapArray[index] + energyMapArray [index - picture->width + 1];
+                if (acumuledEnergyMapArray[index] > rightFather) { acumuledEnergyMapArray[index] = rightFather; }
+            } else if (isRight) {
+                leftFather =  energyMapArray[index] + energyMapArray [index - picture->width - 1];
+                if (acumuledEnergyMapArray[index] > leftFather) { acumuledEnergyMapArray[index] = leftFather; }
+            } else {
+                rightFather =  energyMapArray[index] + energyMapArray [index - picture->width + 1];
+                leftFather =  energyMapArray[index] + energyMapArray [index - picture->width - 1];
+                if (acumuledEnergyMapArray[index] > rightFather) { acumuledEnergyMapArray[index] = rightFather; }
+                if (acumuledEnergyMapArray[index] > leftFather) { acumuledEnergyMapArray[index] = leftFather; }
+            }
+        }
+    }
+
+}
+
+int returnLowerIndex (Img* picture, const int* acumuledEnergyMapArray);
+int returnLowerIndex (Img* picture, const int* acumuledEnergyMapArray) {
+    int index = -1;
+    int value = -1;
+    int size = picture->width*picture->height;
+    for (int i = size - picture->width - 1; i < size; i++) {
+        if (index == -1 || acumuledEnergyMapArray[i] < value) {
+            value = acumuledEnergyMapArray[i];
+            index = i;
+        }
+    }
+    return index;
+}
 
 int main(int argc, char** argv)
 {
@@ -246,15 +310,13 @@ void keyboard(unsigned char key, int x, int y)
         // ...
         // ... (crie uma função para isso!)
 
-        // Exemplo: pintando tudo de amarelo
-//        for(int i=0; i<pic[2].height*pic[2].width; i++)
-//            pic[2].img[i].r = pic[2].img[i].g = 255;
-
         for (int i = 0; i < pic[2].width * pic[2].height; i++) {
-            pic[2].img[i].r = 255;
-            pic[2].img[i].g = 0;
-            pic[2].img[i].b = 0;
+            pic[2].img[i].r = pic[2].img[i].g = pic[2].img[i].b = 27;
         }
+
+        int * energyMapArray = energyMap(pic);
+
+//        int
 
         // Chame uploadTexture a cada vez que mudar
         // a imagem (pic[2])
