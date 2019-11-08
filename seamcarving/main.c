@@ -68,8 +68,6 @@ int calculateEnergy (RGB* rgb1, RGB* rgb2);
 int calculateEnergy (RGB* rgb1, RGB* rgb2) {
     int red = rgb2->r - rgb1->r;
     red *= red;
-    printf("RGB1: %i %i %i\n", rgb1->r, rgb1->g, rgb1->b);
-    printf("RGB2: %i %i %i\n\n", rgb2->r, rgb2->g, rgb2->b);
     int green = rgb2->g - rgb1->g;
     green *= green;
     int blue = rgb2->b - rgb1->b;
@@ -77,9 +75,9 @@ int calculateEnergy (RGB* rgb1, RGB* rgb2) {
     return red + green + blue;
 }
 
-int isRightBorder (int index, int width, int height);
-int isRightBorder (int index, int width, int height) {
-    for (int i = width-1; i < width*height; i += width) {
+int isRightBorder (int index, int widthA, int heightA);
+int isRightBorder (int index, int widthA, int heightA) {
+    for (int i = widthA-1; i < widthA*heightA; i += widthA) {
         if (i == index) { return 1; }
     }
     return 0;
@@ -156,10 +154,10 @@ int calculatePixelEnergy (Img* picture, int currentLineIndex) {
 int * energyMap (Img* img);
 int * energyMap (Img* img) {
     int size = img->height*img->width;
-    int array [size];
+    int * array = malloc(size);
     for (int index = 0; index < size; index++) {
         if (pic[1].img[index].r > 100) {
-            array[index] = 0;
+            array[index] = -10000000;
             continue;
         }
         array[index] = calculatePixelEnergy(&img[0], index);
@@ -167,6 +165,7 @@ int * energyMap (Img* img) {
             array[index] += 10000000; // 10 000 000
         }
     }
+    printf("retornando array");
     return array;
 }
 
@@ -175,7 +174,7 @@ int * acumulatedEnergyMap (Img* picture, const int* energyMapArray) {
 
     int size = picture->height * picture->width;
 
-    int acumuledEnergyMapArray [size];
+    int * acumuledEnergyMapArray = malloc(size);
 
     for (int index = 0; index < size; index++) {
         int leftFather, rightFather;
@@ -217,6 +216,13 @@ int returnLowerIndex (Img* picture, const int* acumuledEnergyMapArray) {
         }
     }
     return index;
+}
+
+int smallerNumber (int value01, int value02, int value03);
+int smallerNumber (int value01, int value02, int value03) {
+    if (value01 < value02 && value01 < value03) { return value01; }
+    if (value02 < value03) { return value02; }
+    return value03;
 }
 
 int main(int argc, char** argv)
@@ -310,13 +316,60 @@ void keyboard(unsigned char key, int x, int y)
         // ...
         // ... (crie uma função para isso!)
 
-        for (int i = 0; i < pic[2].width * pic[2].height; i++) {
-            pic[2].img[i].r = pic[2].img[i].g = pic[2].img[i].b = 27;
-        }
+        //for (int i = 0; i < pic[2].width * pic[2].height; i++) {
+        //pic[2].img[i].r = 200;
+        //pic[2].img[i].g = pic[2].img[i].b = 100;
+        //}
 
         int * energyMapArray = energyMap(pic);
+        int * acumuledEnergyMapArray = acumulatedEnergyMap(&pic[2], energyMapArray);
+        int lowerIndex = returnLowerIndex(&pic[2], acumuledEnergyMapArray);
 
-//        int
+        int size = pic[2].width * pic[2].height;
+        while (lowerIndex > 0) {
+
+            acumuledEnergyMapArray[lowerIndex] = -100; // marca pixel pra deletar ele
+
+            int isTop = lowerIndex < pic[2].width;
+            int isBot = lowerIndex >= (pic[2].width * pic[2].height-pic[2].width);
+            int isLeft = lowerIndex % pic[2].width == 0;
+            int isRight = isRightBorder(lowerIndex, pic[2].width, pic[2].height);
+
+            if (isTop) {
+                break;
+            } else {
+                if (isLeft) {
+                    lowerIndex = acumuledEnergyMapArray[lowerIndex-pic[2].width] <
+                            acumuledEnergyMapArray[lowerIndex-pic[2].width + 1] ?
+                            acumuledEnergyMapArray[lowerIndex-pic[2].width] :
+                            acumuledEnergyMapArray[lowerIndex-pic[2].width + 1];
+                } else if (isRight) {
+                    lowerIndex = acumuledEnergyMapArray[lowerIndex-pic[2].width] <
+                                 acumuledEnergyMapArray[lowerIndex-pic[2].width - 1] ?
+                                 acumuledEnergyMapArray[lowerIndex-pic[2].width] :
+                                 acumuledEnergyMapArray[lowerIndex-pic[2].width - 1];
+                } else {
+
+                    if (acumuledEnergyMapArray[lowerIndex-pic[2].width-1] < acumuledEnergyMapArray[lowerIndex-pic[2].width] &&
+                            acumuledEnergyMapArray[lowerIndex-pic[2].width-1] < acumuledEnergyMapArray[lowerIndex-pic[2].width+1]) {
+                        lowerIndex = lowerIndex-pic[2].width-1;
+                    } else if (acumuledEnergyMapArray[lowerIndex-pic[2].width] < acumuledEnergyMapArray[lowerIndex-pic[2].width+1]) {
+                        lowerIndex = lowerIndex - pic[2].width;
+                    } else {
+                        lowerIndex = lowerIndex-pic[2].width+1;
+                    }
+                }
+            }
+        }
+
+        int aux = 0;
+        for (int i = 0; i < size; i++) {
+            if (acumuledEnergyMapArray[i] == -100) { continue; }
+            pic[2].img[aux++] = pic[2].img[i];
+        }
+
+        pic[2].width--;
+
 
         // Chame uploadTexture a cada vez que mudar
         // a imagem (pic[2])
